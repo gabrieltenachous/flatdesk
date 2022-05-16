@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\User;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreUserController extends FormRequest
 {
@@ -51,5 +53,11 @@ class StoreUserController extends FormRequest
             'password.password_confirmation' => 'Confirma senha é óbrigatorio com a senha ', 
             'password.same' => 'Confirma senha não é igual a senha '
         ];
+    } 
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors(),'status' => true], 422));
     }
+    
+    
 }

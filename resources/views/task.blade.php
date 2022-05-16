@@ -103,8 +103,8 @@
                                             <th>Nome</th>
                                             <th>Descrição</th>
                                             <th>Criação</th>  
-                                            <th>Deletar</th> 
                                             <th>Atualizar</th> 
+                                            <th>Deletar</th> 
                                         </tr>
                                     </thead>
                                     <tbody> 
@@ -120,7 +120,6 @@
                                             <td> 
                                                 <button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button> 
                                             </td> 
-                                            
                                         </tr> 
                                     </tbody> 
                                 </table>

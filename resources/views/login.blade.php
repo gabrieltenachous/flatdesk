@@ -51,5 +51,6 @@
             </section> 
         </div>
       </div>
-    </div>
+    </div>  
+    <script src="/js/auth.js" type="text/javascript"></script>
 @endsection
