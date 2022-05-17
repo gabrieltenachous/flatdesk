@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[AuthController::class,'login']);    
 Route::get('/tarefas',[TaskController::class,'index']);   
 Route::get('/cadastrar',[AuthController::class,'register']);    
+Route::get('/session',[AuthController::class,'session']);

@@ -10,13 +10,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TaskController extends Controller
 {
-    public function __construct(){
-        
+    public function __construct(){  
         $this->user = JWTAuth::parseToken()->authenticate();
     }
 
     public function index(){ 
-        $task = Task::paginate(10); 
+        $task = Task::where('user_id',auth()->user()->id)->paginate(10);
         return response()->json(
             [ 
                 'data' => $task,
@@ -47,7 +46,7 @@ class TaskController extends Controller
         $task->user_id = auth()->user()->id;
         $task->save();
         return response()->json(
-            [ 
+            [
                 'data' => $task,
                 'message' => 'Tarefa editado com sucesso',
             ]

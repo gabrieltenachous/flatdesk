@@ -7,10 +7,11 @@ use App\Http\Requests\User\LoginUserRequest;
 use App\Http\Requests\User\StoreUserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
-    public function store(StoreUserController $request){
+    public function store(StoreUserController $request){ 
         $user = new User();
         $user->email = $request->email; 
         $user->password = Hash::make($request->password);
@@ -50,13 +51,13 @@ class UserController extends Controller
                 'message' => 'Senha ou email invalido',
             ], 401);
         }
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('email',$request->email)->first();   
         return response()->json([
             'data' => [
                 'token' => $token,
                 'user'  => $user,
             ],
-            'message' => 'Usuario cadastrado com sucesso',
+            'message' => 'Usuario logado com sucesso',
         ], 201);
     } 
 }

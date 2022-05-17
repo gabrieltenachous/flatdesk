@@ -75,8 +75,7 @@
     <script src="/template-admin/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
     <script src="/js/auth.js" type="text/javascript"></script>
     <script> 
-        $('form').submit(false);
-        
+        $('form').submit(false); 
         $('#submit').click(function(){ 
             auth.register();
         });

@@ -13,7 +13,7 @@
                         <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
                             <div class="card-header border-0">
                                 <div class="text-center mb-1">
-                                        <img src="/template-admin/app-assets/images/logo/logo.png" alt="branding logo">
+                                    <img src="/template-admin/app-assets/images/logo/logo.png" alt="branding logo">
                                 </div>
                                 <div class="font-large-1  text-center">                       
                                     FleetDesk
@@ -21,28 +21,28 @@
                             </div>
                             <div class="card-content"> 
                                 <div class="card-body">
-                                    <form class="form-horizontal" action="index.html">
+                                    <div id="form_action">
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input type="text" class="form-control round" id="user-name" placeholder="Your Username" required>
+                                            <input type="text" class="form-control round" id="email" name="email" placeholder="Your Username" required>
                                             <div class="form-control-position">
                                                 <i class="ft-user"></i>
                                             </div>
                                         </fieldset>
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input type="password" class="form-control round" id="user-password" placeholder="Enter Password" required>
+                                            <input type="password" class="form-control round" id="password" name="password" placeholder="Enter Password" required>
                                             <div class="form-control-position">
                                                 <i class="ft-lock"></i>
                                             </div>
                                         </fieldset>        
                                         <div class="form-group text-center">
-                                            <button type="submit" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">Entrar</button>    
+                                            <button type="submit" id="submit" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">Entrar</button>    
                                         </div>
                                         <a href="/cadastrar">
                                             <div class="form-group text-center">
                                                 <input type="button" class="btn round btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1" value="Cadastrar-se">
                                             </div>
                                         </a>
-                                    </form>
+                                    </div>
                                 </div> 
                             </div>
                         </div>
@@ -52,5 +52,19 @@
         </div>
       </div>
     </div>  
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/template-admin/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script> 
+    <script src="/template-admin/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js" type="text/javascript"></script>
+    <script src="/template-admin/app-assets/js/core/app-menu.js" type="text/javascript"></script>
+    <script src="/template-admin/app-assets/js/core/app.js" type="text/javascript"></script> 
+    <script src="/template-admin/app-assets/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
+    <script src="/template-admin/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
+    <script src="/template-admin/app-assets/js/scripts/extensions/toastr.js" type="text/javascript"></script>
     <script src="/js/auth.js" type="text/javascript"></script>
+    <script>  
+        $('#submit').click(function(){ 
+            auth.login();
+        });  
+    </script>
 @endsection

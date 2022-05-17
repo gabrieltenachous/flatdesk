@@ -22,7 +22,7 @@ Route::get('/user/logout',[UserController::class,'logout']);
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('/task',[TaskController::class,'index']); 
     Route::post('/task',[TaskController::class,'store']); 
-    Route::post('/task/{id}',[TaskController::class,'update']); 
+    Route::put('/task/{id}',[TaskController::class,'update']); 
     Route::get('/task/{id}',[TaskController::class,'show']); 
     Route::delete('/task/{id}',[TaskController::class,'destroy']); 
 }); 

@@ -24,10 +24,10 @@ class StoreUserController extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    { 
         return [ 
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255:unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|required_with:password_confirmation|same:password_confirmation|min:8',  
         ];
     }
@@ -46,6 +46,7 @@ class StoreUserController extends FormRequest
             'email.required' => 'Email é óbrigatorio',
             'email.string' => 'Email tem que ser do tipo string',
             'email.email' => 'Email incorreto',
+            'email.unique' => 'Email já existe',
             'email.max' => 'Email tem que ser menor que 255 caracteres',
             'password.required' => 'Senha é óbrigatorio',
             'password.string' => 'Senha tem que ser do tipo string',
@@ -53,11 +54,7 @@ class StoreUserController extends FormRequest
             'password.password_confirmation' => 'Confirma senha é óbrigatorio com a senha ', 
             'password.same' => 'Confirma senha não é igual a senha '
         ];
-    } 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors(),'status' => true], 422));
-    }
+    }  
     
     
 }

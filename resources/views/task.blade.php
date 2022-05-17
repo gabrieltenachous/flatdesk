@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" href="/template-admin/app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="/template-admin/app-assets/vendors/css/forms/icheck/icheck.css">
     <link rel="stylesheet" type="text/css" href="/template-admin/app-assets/vendors/css/forms/icheck/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
     <link rel="stylesheet" type="text/css" href="/template-admin/app-assets/css/app.css">
@@ -88,7 +90,7 @@
                             <div class="card-header"> 
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i> Cadastrar</button> 
+                                    <button id="register" data-toggle="modal" data-target="#taskModel" class="btn btn-primary btn-sm"><i class="ft-plus white"></i> Cadastrar</button> 
                                 </div>
                             </div>
                         </div>
@@ -107,40 +109,54 @@
                                             <th>Deletar</th> 
                                         </tr>
                                     </thead>
-                                    <tbody> 
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="character35"><input type="checkbox" checked disabled class="input-chk"></td>
-                                            <td class="character35">Limpar a casa</td>
-                                            <td class="character35">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis ea aliquam quod deleniti rerum error facilis quas, nesciunt nam? Ab ullam perferendis doloribus numquam, accusamus illum iure sed dolorem impedit!</td>
-                                            <td>10/05/2017</td> 
-                                            <td> 
-                                                <button type="button" class="btn btn-icon btn-warning"><i class="fa fa-refresh"></i></button>
-                                            </td> 
-                                            <td> 
-                                                <button type="button" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button> 
-                                            </td> 
-                                        </tr> 
+                                    <tbody id="tbody-list"> 
+                                         
                                     </tbody> 
                                 </table>
                                 </div> 
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </section>
         </div>
       </div>
     </div>  
-    <footer class="footer footer-static footer-light navbar-border navbar-shadow">
-      <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">2018  &copy; Copyright <a class="text-bold-800 grey darken-2" href="https://themeselection.com" target="_blank">ThemeSelection</a></span>
-        <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
-          <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/" target="_blank"> More themes</a></li>
-          <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/support" target="_blank"> Support</a></li>
-          <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank"> Purchase</a></li>
-        </ul>
+    <input type="hidden" id="token" name="token" value="{{$token}}"> 
+    <div class="modal fade" id="taskModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cadastrar Tarefa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form_register">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Nome:</label>
+              <input type="text" id="name" class="form-control" id="name" placeholder="Nome">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Descrição:</label>
+              <textarea class="form-control" id="description" placeholder="Descrição" ></textarea> 
+            </div> 
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Status:</label> 
+              <input type="checkbox" class="form-control" name="status" id="status" >
+            </div> 
+            <input type="hidden" id="id" name="id">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" id="confirm_register" class="btn btn-primary">Confirmar</button>
+        </div>
       </div>
-    </footer>
+    </div>
+  </div>
+
     <style> 
         .character35 {
             max-width: 35ch;
@@ -149,20 +165,49 @@
             white-space: nowrap;
         }
     </style>
-    <!-- BEGIN VENDOR JS-->
-    <script src="/template-admin/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <script src="/template-admin/app-assets/vendors/js/tables/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="/template-admin/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js" type="text/javascript"></script>
-    <script src="/template-admin/app-assets/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN CHAMELEON  JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/template-admin/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script> 
+    <script src="/template-admin/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js" type="text/javascript"></script>
     <script src="/template-admin/app-assets/js/core/app-menu.js" type="text/javascript"></script>
-    <script src="/template-admin/app-assets/js/core/app.js" type="text/javascript"></script>
-    <!-- END CHAMELEON  JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <script src="/template-admin/app-assets/js/scripts/pages/invoices-list.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL JS-->
+    <script src="/template-admin/app-assets/js/core/app.js" type="text/javascript"></script> 
+    <script src="/template-admin/app-assets/js/scripts/forms/form-login-register.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="/js/auth.js" type="text/javascript"></script>
+    <script src="/js/task.js" type="text/javascript"></script>
+    <script>  
+      $('form').submit(false); 
+      task.index();
+      $('#register').click(function(){
+          $('#id').val(null);
+          $('#taskModel').modal()
+      });
+      $('#confirm_register').click(function(){
+        if($('#id').val()){ 
+          task.update();
+        }else{ 
+          task.create();
+        }
+      }) 
+      function update(id){
+        task.show(id);
+      }
+      function del(id){
+        Swal.fire({
+          title: 'Voce tem certeza?',
+          text: "Essa ação é irrevercivel!!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sim, deletar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            task.delete(id); 
+          }
+        })
+        // task.delete(id);
+      }
+    </script>
   </body>
 </html>
